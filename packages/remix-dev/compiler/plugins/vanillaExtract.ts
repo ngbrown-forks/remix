@@ -1,7 +1,7 @@
-import { dirname, resolve } from "node:path";
+import { dirname, relative, resolve } from "node:path";
 import type { Compiler } from "@vanilla-extract/compiler";
 import { createCompiler } from "@vanilla-extract/compiler";
-import { cssFileFilter } from "@vanilla-extract/integration";
+import { cssFileFilter, normalizePath } from "@vanilla-extract/integration";
 import type { Plugin } from "esbuild";
 
 import type { Options } from "../options";
@@ -28,26 +28,35 @@ function getCompiler(root: string, mode: Options["mode"]) {
       root,
       identifiers: mode === "production" ? "short" : "debug",
       viteConfig: {
+        build: {
+          // disable inlining
+          assetsInlineLimit: 0,
+          cssCodeSplit: false,
+        },
+        resolve: {
+          alias: {
+            // Handle root-relative imports within Vanilla Extract files
+            "~": root,
+          },
+        },
         plugins: [
           {
             name: "remix-assets",
             enforce: "pre",
             async resolveId(source) {
-              // Handle root-relative imports within Vanilla Extract files
-              if (source.startsWith("~")) {
-                return await this.resolve(source.replace("~", ""));
-              }
               // Handle static asset JS imports
               if (source.startsWith("/") && staticAssetRegexp.test(source)) {
                 return {
                   external: true,
-                  id: "~" + source,
+                  id: normalizePath(
+                    relative(resolve("."), resolve(root, "." + source))
+                  ),
                 };
               }
             },
             transform(code) {
               // Translate Vite's fs import format for root-relative imports
-              return code.replace(/\/@fs\/~\//g, "~/");
+              return code.replace(/\/@fs\/(?:~\/|app\/)/g, "~/");
             },
           },
         ],

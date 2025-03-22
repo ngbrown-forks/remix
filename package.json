@@ -139,7 +139,8 @@
   },
   "pnpm": {
     "patchedDependencies": {
-      "@changesets/assemble-release-plan@5.2.2": "patches/@changesets__assemble-release-plan@5.2.2.patch"
+      "@changesets/assemble-release-plan@5.2.2": "patches/@changesets__assemble-release-plan@5.2.2.patch",
+      "@vanilla-extract/compiler@0.1.2": "patches/@vanilla-extract__compiler@0.1.2.patch"
     }
   }
 }
