@@ -50,7 +50,7 @@ describe("addSuffixToCssSideEffectImports", () => {
         .toMatchInlineSnapshot(`
         "require("./foo.css?__remix_sideEffect__");
 
-        export const foo: string = ('foo' satisfies string);"
+        export const foo: string = 'foo' satisfies string;"
       `);
     });
 
@@ -66,7 +66,7 @@ describe("addSuffixToCssSideEffectImports", () => {
         .toMatchInlineSnapshot(`
         "require("./foo.css?__remix_sideEffect__");
 
-        export const foo: string = ('foo' satisfies string);
+        export const foo: string = 'foo' satisfies string;
         export const Bar = () => <div>{foo}</div>;"
       `);
     });
@@ -378,7 +378,7 @@ describe("addSuffixToCssSideEffectImports", () => {
         "require("./foo.css?__remix_sideEffect__");
 
         // TS
-        const exampleSatisfies = ('satisfies' satisfies string);
+        const exampleSatisfies = 'satisfies' satisfies string;
         enum ExampleEnum {
           Foo,
           Bar,
@@ -428,7 +428,7 @@ describe("addSuffixToCssSideEffectImports", () => {
         "require("./foo.css?__remix_sideEffect__");
 
         // TS
-        const exampleSatisfies = ('satisfies' satisfies string);
+        const exampleSatisfies = 'satisfies' satisfies string;
         enum ExampleEnum {
           Foo,
           Bar,
