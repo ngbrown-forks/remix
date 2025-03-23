@@ -1,0 +1,42 @@
+diff --git a/dist/vanilla-extract-compiler.cjs.dev.js b/dist/vanilla-extract-compiler.cjs.dev.js
+index ae612b27069de137632e5e498880580bae4ff635..66b6cce1ba625fb0417f2dc3e6cac48c6582ee4f 100644
+--- a/dist/vanilla-extract-compiler.cjs.dev.js
++++ b/dist/vanilla-extract-compiler.cjs.dev.js
+@@ -111,7 +111,8 @@ const createViteServer = async ({
+         // Shouldn't affect functionality as it's equivalent to the default value.
+         // Can be removed once https://github.com/vitejs/vite/pull/19247 is released.
+         exclude: [/node_modules/]
+-      }
++      },
++      ...viteConfig.build,
+     },
+     ssr: {
+       noExternal: true,
+diff --git a/dist/vanilla-extract-compiler.cjs.prod.js b/dist/vanilla-extract-compiler.cjs.prod.js
+index ae612b27069de137632e5e498880580bae4ff635..66b6cce1ba625fb0417f2dc3e6cac48c6582ee4f 100644
+--- a/dist/vanilla-extract-compiler.cjs.prod.js
++++ b/dist/vanilla-extract-compiler.cjs.prod.js
+@@ -111,7 +111,8 @@ const createViteServer = async ({
+         // Shouldn't affect functionality as it's equivalent to the default value.
+         // Can be removed once https://github.com/vitejs/vite/pull/19247 is released.
+         exclude: [/node_modules/]
+-      }
++      },
++      ...viteConfig.build,
+     },
+     ssr: {
+       noExternal: true,
+diff --git a/dist/vanilla-extract-compiler.esm.js b/dist/vanilla-extract-compiler.esm.js
+index 84c8ec7b12738c5c3eefa2d7fdae019943b66d19..fbe2c85953ad4830bea40f20475d72ce39ca2043 100644
+--- a/dist/vanilla-extract-compiler.esm.js
++++ b/dist/vanilla-extract-compiler.esm.js
+@@ -103,7 +103,8 @@ const createViteServer = async ({
+         // Shouldn't affect functionality as it's equivalent to the default value.
+         // Can be removed once https://github.com/vitejs/vite/pull/19247 is released.
+         exclude: [/node_modules/]
+-      }
++      },
++      ...viteConfig.build,
+     },
+     ssr: {
+       noExternal: true,
